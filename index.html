@@ -8,6 +8,8 @@
   <title>Circular Menu</title>
   <style>
     body {
+      /* background: url("https://i.ytimg.com/vi/V648lE-tlbw/maxresdefault.jpg") no-repeat center center;
+      background-size: cover; */
       margin: 0;
       padding: 0;
       display: flex;
@@ -19,24 +21,41 @@
       box-sizing: border-box;
       fill: rgba(0, 0, 0, 0.3);
       transition: all 0.3s linear;
+      cursor: pointer;
+      stroke-width: 0.3;
+      stroke: white;
     }
     .hidden {
       opacity: 0;
     }
     .svg-button:hover {
-      fill: rgba(0, 0, 0, 0.1);
+      stroke-width: 1;
+      fill: rgba(0, 0, 0, 0.5)
     }
+    
     .svg-button.select {
-      fill: transparent;
+      fill: rgba(0, 0, 0, 0.35);
     }
+
+    /* Special class */
+    .svg-button.cancel {
+      stroke-width: 0;
+      fill: rgba(255, 0, 0, 0)
+    }
+    .svg-button.cancel:hover {
+      stroke-width: 0;
+      fill: rgba(255, 0, 0, 0.3)
+    }
+    
     .svg-button-text {
       pointer-events: none;
+      fill: #FFFFFF;
     }
   </style>
 </head>
 <body>
   <svg id="svgMenu">
-    <circle cx="0" cy="0" r="2" stroke="red" stroke-width="3" />
+    <!-- <circle cx="0" cy="0" r="2" stroke="red" stroke-width="3" /> -->
   </svg>
 </body>
 </html>

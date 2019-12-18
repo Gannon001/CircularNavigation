@@ -39,23 +39,9 @@ const menu = [
   { label: 'Menu 0', subMenu: subMenu0 },
   { label: 'Menu 1', subMenu: subMenu1 },
   { label: 'Menu 2', subMenu: subMenu2 },
+  { label: 'X', data: 'cancel_event', class: 'cancel' },
   { label: 'Menu 3', subMenu: subMenu3 },
-  { label: 'Cancel', data: 'cancel_event' },
-  { label: 'Menu 0', subMenu: subMenu0 },
-  { label: 'Menu 1', subMenu: subMenu1 },
-  { label: 'Menu 2', subMenu: subMenu2 },
   { label: 'Menu 3', subMenu: subMenu3 },
-  { label: 'Cancel', data: 'cancel_event' },
-  { label: 'Menu 0', subMenu: subMenu0 },
-  { label: 'Menu 1', subMenu: subMenu1 },
-  { label: 'Menu 2', subMenu: subMenu2 },
-  { label: 'Menu 3', subMenu: subMenu3 },
-  { label: 'Cancel', data: 'cancel_event' },
-  { label: 'Menu 0', subMenu: subMenu0 },
-  { label: 'Menu 1', subMenu: subMenu1 },
-  { label: 'Menu 2', subMenu: subMenu2 },
-  { label: 'Menu 3', subMenu: subMenu3 },
-  { label: 'Cancel', data: 'cancel_event' },
 ]
 
 
@@ -109,7 +95,7 @@ class CircularMavigation {
       checkDeepIndex++
     } while (true)
 
-    if (change === false && newDeep.length === this.currentDeep.length) {
+    if (change === false && newDeep.length <= this.currentDeep.length) {
       return
     }
     options.target.classList.add('select')
@@ -227,8 +213,12 @@ class CircularMavigation {
       newElementText.setAttribute('x', posXbtn)
       newElementText.setAttribute('y', posYbtn)
 
+      if (m.class) {
+        newElement.classList.add(m.class)
+        newElementText.classList.add(m.class)
+      }
+
       $baseElement.appendChild(newElementText)
-      
       elements.push({
         items: [newElement, newElementText],
         subItem: []
