@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./script.js"></script>
+  <title>Circular Menu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .svg-button {
+      box-sizing: border-box;
+      fill: rgba(0, 0, 0, 0.3);
+      transition: all 0.3s linear;
+    }
+    .hidden {
+      opacity: 0;
+    }
+    .svg-button:hover {
+      fill: rgba(0, 0, 0, 0.1);
+    }
+    .svg-button.select {
+      fill: transparent;
+    }
+    .svg-button-text {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <svg id="svgMenu">
+    <circle cx="0" cy="0" r="2" stroke="red" stroke-width="3" />
+  </svg>
+</body>
+</html>
