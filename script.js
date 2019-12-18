@@ -78,11 +78,12 @@ class CircularMavigation {
   }
 
   showMenu (menu, deep = 0) {
+    this.reset()
     this.buildMenu(menu, this.baseR, this.baseR + this.baseHeigth)
   }
 
   onPressItem (item, options) {
-    if (! item.subMenu) {
+    if (! item.subMenu && options.type === 'click') {
       alert(JSON.stringify(item))
       this.reset()
       // DEBUG
@@ -112,10 +113,12 @@ class CircularMavigation {
       return
     }
     options.target.classList.add('select')
-    const d = options.deep.length
-    const r = this.baseR + d * this.baseHeigth
     this.currentDeep = options.deep
-    this.buildMenu(item.subMenu, r, r + this.baseHeigth, 20, options.baseAngle, this.currentDeep)
+    if (item.subMenu) {
+      const d = options.deep.length
+      const r = this.baseR + d * this.baseHeigth
+      this.buildMenu(item.subMenu, r, r + this.baseHeigth, 20, options.baseAngle, this.currentDeep)
+    }
   }
 
   getDeepElement (deep) {
@@ -193,11 +196,21 @@ class CircularMavigation {
       d += ` A ${r1} ${r1} 0 0 1 ${p3[0]} ${p3[1]}`
       d += ' Z'
       newElement.setAttribute('d', d)
-      newElement.addEventListener('click', () => {
+      
+      newElement.addEventListener('mouseenter', (e) => {
         this.onPressItem(m, {
           target: newElement,
           baseAngle: angCenterBtn,
-          deep: [...deep, i]
+          deep: [...deep, i],
+          type: 'mouseenter'
+        })
+      })
+      newElement.addEventListener('click', (e) => {
+        this.onPressItem(m, {
+          target: newElement,
+          baseAngle: angCenterBtn,
+          deep: [...deep, i],
+          type: 'click'
         })
       })
       $baseElement.appendChild(newElement)
@@ -231,10 +244,22 @@ class CircularMavigation {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+// window.addEventListener('DOMContentLoaded', () => {
+//   const $svgElem = document.querySelector('#svgMenu')
+//   const myMenu = new CircularMavigation($svgElem)
+
+//   myMenu.showMenu(menu)
+// })
+
+const main = function () {
   const $svgElem = document.querySelector('#svgMenu')
   const myMenu = new CircularMavigation($svgElem)
-
   myMenu.showMenu(menu)
-})
+}
+
+if (document.readyState === 'complete') {
+  main()
+} else {
+  document.addEventListener('DOMContentLoaded', main)
+}
 
